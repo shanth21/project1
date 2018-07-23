@@ -1,14 +1,22 @@
-
 window.onload = function() {
 var button = document.getElementById("btn");
 var name = document.getElementById("name");
 var password = document.getElementById("password");
+
+var auth = localStorage.getItem("auth");
+if(auth){
+	location.href = "index.html";
+}
 
 var isValid = function() {
 var match = name.value.match(/^[a-zA-z0-9_.]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/);
 var errNameRef = document.getElementById("js-name-err-msg");
 var errPasswordRef = document.getElementById("js-password-err-msg");
 
+var auth = localStorage.getItem('auth');
+if(auth) {
+location.href = 'index.html';
+}
 
 	if(!match){
 		errNameRef.innerHTML = "Enter a valid mail id!";
@@ -32,8 +40,11 @@ password.onkeypress = function(e){
 }		
 
 button.onclick = function(){
-	if(isValid()){
-		alert("Logged in successfully!");
+	if(isValid()) {
+		alert("login success");
+		localStorage.setItem("auth", name.value);
+		location.href="index.html"
+
 	}
 }
 }
